@@ -1,0 +1,23 @@
+{
+  "name": "app-nodejs-restapi",
+  "version": "1.0.0",
+  "description": "app rest api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dwisantra/app-nodejs-restapi.git"
+  },
+  "keywords": [
+    "restapi",
+    "nodejs"
+  ],
+  "author": "Dwi Santra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dwisantra/app-nodejs-restapi/issues"
+  },
+  "homepage": "https://github.com/Dwisantra/app-nodejs-restapi#readme"
+}
