@@ -5,4 +5,7 @@ module.exports = function(app) {
 
     app.route('/')
         .get(jsonku.index);
+
+    app.route('/all-data')
+        .get(jsonku.tampilSemuaData);
 };
