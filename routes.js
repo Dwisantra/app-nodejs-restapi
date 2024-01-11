@@ -8,4 +8,10 @@ module.exports = function(app) {
 
     app.route('/all-data')
         .get(jsonku.tampilSemuaData);
+
+    app.route('/data/:id')
+        .get(jsonku.showById);
+
+    app.route('/data/nim/:nim')
+        .get(jsonku.showByNim);
 };
