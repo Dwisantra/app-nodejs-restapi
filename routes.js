@@ -25,4 +25,7 @@ module.exports = function(app) {
     
     app.route('/delete')
         .delete(jsonku.deleteData);
+
+    app.route('/show-group')
+        .get(jsonku.showGroup);
 };

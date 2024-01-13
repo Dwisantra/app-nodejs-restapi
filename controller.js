@@ -70,6 +70,7 @@ exports.tambahData = function (req, res) {
     );
 };
 
+// mengupdate data
 exports.updateData = function (req, res) {
     var id = req.body.id_mahasiswa;
     var nim = req.body.nim;
@@ -88,6 +89,7 @@ exports.updateData = function (req, res) {
     );
 };
 
+// menghapus data
 exports.deleteData = function (req, res) {
     var id = req.body.id_mahasiswa;
     
@@ -101,3 +103,16 @@ exports.deleteData = function (req, res) {
         }  
     );
 };
+
+// menampilkan group
+exports.showGroup = function (req, res) {
+    connection.query("SELECT mahasiswa.id_mahasiswa, mahasiswa.nim, mahasiswa.nama, mahasiswa.jurusan, matakuliah.matakuliah, matakuliah.sks FROM krs JOIN matakuliah JOIN mahasiswa WHERE krs.id_matakuliah = matakuliah.id_matakuliah AND krs.id_mahasiswa = mahasiswa.id_mahasiswa ORDER BY mahasiswa.id_mahasiswa",
+        function (error, rows, fields) {
+            if(error) {
+                console.log(error);
+            }else{
+                response.nestedOk(rows, res);
+            }
+        } 
+    )
+}
