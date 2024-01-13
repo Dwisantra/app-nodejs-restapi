@@ -19,4 +19,7 @@ module.exports = function(app) {
 
     app.route('/add-data')
         .post(jsonku.tambahData);
+
+    app.route('/update-data')
+        .put(jsonku.updateData);
 };

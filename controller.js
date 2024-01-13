@@ -2,6 +2,7 @@
 
 var response = require("./res");
 var connection = require("./koneksi");
+const conn = require("./koneksi");
 
 exports.index = function (req, res) {
     response.ok("Aplikasi RestApi berjalan!", res);
@@ -66,5 +67,23 @@ exports.tambahData = function (req, res) {
                 response.ok("Berhasil menambahkan data!", res);
             }
         }
+    );
+};
+
+exports.updateData = function (req, res) {
+    var id = req.body.id_mahasiswa;
+    var nim = req.body.nim;
+    var nama = req.body.nama;
+    var jurusan = req.body.jurusan;
+
+    connection.query(
+        "UPDATE mahasiswa SET nim=?, nama=?, jurusan=? WHERE id_mahasiswa=?", [nim,nama,jurusan, id],
+        function (error, rows, fields) {
+            if(error) {
+                console.log(error);
+            }else{
+                response.ok("Berhasil ubah data", res);
+            }
+        }        
     );
 };
