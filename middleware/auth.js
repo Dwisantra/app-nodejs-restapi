@@ -16,10 +16,10 @@ exports.registerUser = function(req, res) {
         tanggal_daftar: new Date()
     }
 
-    var query = "SELECT email FROM ?? WHERE ??";
+    var query = "SELECT email FROM ?? WHERE ??=?";
     var table = ["user", "email", post.email];
 
-    query = mysql.format(query.table);
+    query = mysql.format(query,table);
 
     connection.query(query, function(error, rows) {
         if (error) {
