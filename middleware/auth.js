@@ -11,7 +11,7 @@ exports.registerUser = function(req, res) {
     var post = {
         username: req.body.username,
         email: req.body.email,
-        password: md5(req.body.email),
+        password: md5(req.body.password),
         role: req.body.role,
         tanggal_daftar: new Date()
     }
@@ -38,6 +38,63 @@ exports.registerUser = function(req, res) {
                 });
             }else{
                 response.ok("Email sudah terdaftar!", res);
+            }
+        }
+    });
+}
+
+// controller untuk login
+exports.loginUser = function(req, res) {
+    var post = {
+        email: req.body.email,
+        password: req.body.password
+    }
+
+    var query = "SELECT * FROM ?? WHERE ??=? AND ??=?";
+    var table = ["user", "email", post.email, "password", md5(post.password)];
+
+    query = mysql.format(query,table);
+
+    // console.log(query);
+
+    connection.query(query, function(error, rows) {
+        if(error){
+            console.log(error);
+        }else{
+            if(rows.length == 1){
+                var token = jwt.sign({rows}, config.secret, {
+                    expiresIn: 1440
+                });
+
+                id_user = rows[0].id;
+
+                var data = {
+                    id_user: id_user,
+                    access_token: token,
+                    ip_address: ip.address()
+                }
+
+                var query = "INSERT INTO ?? SET ?";
+                var table = ["akses_token"];
+
+                query = mysql.format(query, table);
+
+                connection.query(query, data, function(error, rows) {
+                    if (error) {
+                        console.log(error);
+                    }else{
+                        res.json(
+                            {
+                                success: true,
+                                message: 'Generate Token Berhasil!',
+                                token: token,
+                                currUser: data.id_user
+                            }
+                        );
+                    }
+                });
+            }else{
+                res.json({'Error': true, 'Message':'Email atau Password salah!'});
             }
         }
     });
