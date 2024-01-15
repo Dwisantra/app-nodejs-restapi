@@ -86,6 +86,7 @@ exports.loginUser = function(req, res) {
                         res.json(
                             {
                                 success: true,
+                                code: 200,
                                 message: 'Generate Token Berhasil!',
                                 token: token,
                                 currUser: data.id_user
@@ -98,4 +99,9 @@ exports.loginUser = function(req, res) {
             }
         }
     });
+}
+
+// controller tes verifikasi
+exports.halamanRahasia = function(req, res){
+    response.ok('Halaman ini hanya untuk user dengan role = 2!', res);
 }
